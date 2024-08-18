@@ -17,7 +17,7 @@ Este é um projeto simples de lista de tarefas (Todo List) construído com Vue.j
 
 ### Instalação
 Clone o repositório:
-git clone https://github.com/usuario/todo-list-vuejs.git
+git clone https://github.com/resenhandodirei/ToDo-list_vuejs
 
 ### Navegue até o diretório do projeto:
 cd todo-list-vuejs
@@ -37,7 +37,8 @@ cd todo-list-vuejs
 
 ### Imagens do Projeto
 Aqui estão alguns prints mostrando o processo de produção:
-
+/home/larimscorrea/Codes/todo-list_vuejs-js/print1.png
+/home/larimscorrea/Codes/todo-list_vuejs-js/print2.png
 
 ### Tecnologias Utilizadas
 - Vue.js
