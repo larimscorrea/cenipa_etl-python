@@ -54,6 +54,17 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input {
+  width: 200px;
+  height: 40px;
+  padding: 0; /* Remove qualquer espaçamento interno */
+  margin: 0; /* Remove margens externas */
+  outline: none; /* Remove contorno padrão */
+  box-sizing: border-box; /* Garante que padding e bordas sejam incluídos nas dimensões */
+  font-size: 12px; /* Ajusta o tamanho da fonte para evitar altura adicional */
+  line-height: normal; /* Garante que o line-height não crie espaçamento extra */
+}
+
 .card {
   padding: 2em;
 }
