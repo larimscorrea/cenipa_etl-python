@@ -37,8 +37,10 @@ cd todo-list-vuejs
 
 ### Imagens do Projeto
 Aqui estão alguns prints mostrando o processo de produção:
-/home/larimscorrea/Codes/todo-list_vuejs-js/print1.png
-/home/larimscorrea/Codes/todo-list_vuejs-js/print2.png
+![App Screenshot](https://github.com/resenhandodirei/ToDo-list_vuejs/blob/main/print1.png?raw=true)
+
+
+![App Screenshot](https://github.com/resenhandodirei/ToDo-list_vuejs/blob/main/print2.png?raw=true)
 
 ### Tecnologias Utilizadas
 - Vue.js
