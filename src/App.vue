@@ -8,36 +8,39 @@ const input_content = ref('')
 const input_category = ref(null)
 
 const todos_asc = computed(() => todos.value.sort((a, b) => {
-  return b.createAt - a.createAt
+  return a.createAt - b.createAt
 }))
+
+watch(name, (newVal) => {
+  localStorage.setItem('name', newVal)
+})
+
+
+watch(todos, (newVal) => {
+  localStorage.setItem('todos', JSON.stringify(newVal))
+}, { 
+  deep: true 
+})
 
 const addTodo = () => {
   if (input_content.value.trim() === '' || input_category.value === null) {
     return 
   }
+
   todos.value.push({
     content: input_content.value,
     category: input_category.value,
     done: false,
     createdAt: new Date().getTime()
   })
-  input_content.value = ''
-  input_category.value = null
+  
 
 } 
 
 const removeTodo = todo => {
-  todos.value = todos.value.filter(t => t !== todo)
+  todos.value = todos.value.filter((t) => t !== todo)
 }
 
-
-watch(todos, newVal => {
-  localStorage.setItem('todos', JSON.stringify(newVal))
-}, { deep: true })
-
-watch(name, (newVal) => {
-  localStorage.setItem('name', newVal)
-})
 
 onMounted(() => {
   name.value = localStorage.getItem('name') || ``
@@ -51,17 +54,22 @@ onMounted(() => {
       
       <section class="greeting">
         <h2 class="title">
-          What's up, <input type="text" placeholder="Name here" v-model="name" />
+          What's up, 
+          <input 
+          type="text" 
+          placeholder="Name here" 
+          v-model="name" />
         </h2>
       </section>
 
       <section class="create-todo">
-        <h3>CREATE A TO DO</h3>
+        <h3>CREATE A TODO</h3>
         
-        <form @submit.prevent=""> 
+        <form id="new-todo-form" @submit.prevent="addTodo"> 
           <h4>What's on your todo list?</h4>
           <input 
           type="text" 
+          name="content"
           placeholder="e.g. make a video" 
           v-model="input_content" />
 
@@ -72,7 +80,8 @@ onMounted(() => {
             <label>
               <input 
                 type="radio" 
-                name="category" 
+                name="category"
+                id="category1" 
                 value="business" 
                 v-model="input_category" /> 
                 <span class="bubble business"></span>
@@ -83,9 +92,10 @@ onMounted(() => {
                 <input 
                   type="radio" 
                   name="category" 
+                  id="category2"
                   value="personal" 
                   v-model="input_category" /> 
-                <span class="bubble business"></span>
+                <span class="bubble personal"></span>
                 <div>Personal</div>
               </label>
 
@@ -96,25 +106,30 @@ onMounted(() => {
       </section>
 
       <section class="todo-list">
-        <h3>TODO LIST</h3>
+			<h3>TODO LIST</h3>
+			<div class="list" id="todo-list">
 
-          <div v-for="todo in todos_asc" :class:"`todo-item ${todo.done && 'done'}`">
+				<div v-for="todo in todos_asc" :class="`todo-item ${todo.done && 'done'}`">
+					<label>
+						<input type="checkbox" v-model="todo.done" />
+						<span :class="`bubble ${
+							todo.category == 'business' 
+								? 'business' 
+								: 'personal'
+						}`"></span>
+					</label>
 
-              <label>
-                <input type="checkbox" v-model="todo.done" />
-                <span :class="`bubble ${todo.category}`"></span>
-              
-              </label>
+					<div class="todo-content">
+						<input type="text" v-model="todo.content" />
+					</div>
 
-              <div class="todo-content">
-                <input type="text" v-model="todo.content" />
-              </div>
+					<div class="actions">
+						<button class="delete" @click="removeTodo(todo)">Delete</button>
+					</div>
+				</div>
 
-              <div class="action">
-                <button class="delete" @click="removeTodo(todo)">Delete</button>
-                </div>
-            </div>
-      </section>
+			</div>
+		</section>
 
       
     </main>
